@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RediStra
 
-## Getting Started
+Hey! RediStra is a self‑hosted Redis management tool with a nice, clean UI. No more juggling CLI commands or passing around passwords — just spin it up and let your team browse keys through the browser.
 
-First, run the development server:
+It's open source, so grab it, tweak it, make it yours.
+
+## Features
+
+- **Multi-connection** — manage all your Redis servers in one place
+- **Key browser** — search, filter by type, edit values with type-aware editors
+- **Team-ready** — Admin / Editor / Viewer roles with proper access control
+- **Audit log** — full activity trail with export support
+- **Secure sessions** — access + refresh tokens (HTTP‑only cookies)
+- **Self-hosted** — just SQLite, no external services needed
+- **Single port** — one Next.js app serves both UI and API
+- **Focused modals** — fast create/edit/delete flows without leaving the page
+
+## How we compare
+
+| Feature | RediStra | RedisInsight | Redis Commander | P3X Redis UI | Medis |
+|---------|----------|--------------|-----------------|--------------|-------|
+| **Web-first** | ✅ | ⚠️ Desktop + Docker | ✅ | ✅ | ❌ Mac only |
+| **Built-in auth** | ✅ Required | ✅ | ⚠️ Optional | ✅ | N/A |
+| **Role-based access** | ✅ 3 roles | ❌ | ❌ | ❌ | ❌ |
+| **Audit logging** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Multi-user** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Simple setup** | ✅ Guided | ✅ | ✅ | ⚠️ Complex | ✅ |
+| **Self-hosted** | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Open source** | ✅ MIT | ⚠️ Freemium | ✅ | ✅ | ❌ Paid |
+
+**TL;DR:** If you need **one web app, team auth, and audit logs** — that's us.
+
+## Getting started
+
+### Prerequisites
+
+- **Bun 1.1+** (for development)
+
+### Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+git clone https://github.com/OussemaJaouadi/redistra.git
+cd redistra
+bun install
+cp .env.example .env
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then hit `http://localhost:3000` and you're in!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env` and set these:
 
-## Learn More
+| Variable | Description |
+|----------|-------------|
+| `JWT_SECRET` | Session signing key (32+ chars, random) |
+| `ENCRYPTION_KEY` | Encrypts Redis passwords (exactly 32 chars) |
+| `DATABASE_URL` | SQLite path (default: `./data/redis-ui.db`) |
 
-To learn more about Next.js, take a look at the following resources:
+Generate secrets:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+openssl rand -base64 32
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Docker
 
-## Deploy on Vercel
+```bash
+docker compose up --build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Uses `docker-compose.yml` + your `.env`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Pages
+
+| Page | What it does |
+|------|--------------|
+| **Setup / Login** | First admin setup + sign‑in |
+| **Dashboard** | System health + all connections |
+| **Connection** | Stats, databases, key browser |
+| **Keys** | Browse, filter, edit, set TTLs |
+| **Users** | Manage team members |
+| **Audit Log** | Activity feed + charts |
+| **Settings** | Preferences + about |
+
+## UI patterns (why it feels fast)
+
+- **Dialogs (modals)** for quick actions: create connection, edit connection, delete confirmation, reset password.
+- **Sheets (right drawer)** for key details and edits without losing context.
+- **Compact tables** with filters, sorting, and pagination baked in.
+- **Consistent feedback** with success, failure, and info toasts.
+
+## Tech stack
+
+| Layer | Tech |
+|-------|------|
+| **Frontend** | Next.js 16, React 19, Tailwind v4, shadcn/ui |
+| **Backend** | Elysia (inside Next.js route handlers) |
+| **Database** | SQLite via @libsql/client + Drizzle ORM |
+| **Auth** | bcryptjs + JWT (HTTP‑only cookies) |
+
+## Scripts
+
+```bash
+bun dev      # dev server
+bun lint     # lint code
+bun build    # production build
+```
+
+## License
+
+MIT — free to use, tweak, and share.
+
+Built by **Oussema Jaouadi** — https://oussemajaouadi.site

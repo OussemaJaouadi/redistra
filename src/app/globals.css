@@ -1,26 +1,397 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* === Brick Red (Redis Brand / Primary) === */
+  --color-brick-red-50: oklch(94.81% 0.023 14.26);
+  --color-brick-red-100: oklch(89.52% 0.049 13.37);
+  --color-brick-red-200: oklch(79.64% 0.100 15.68);
+  --color-brick-red-300: oklch(70.71% 0.156 18.06);
+  --color-brick-red-400: oklch(63.70% 0.206 21.58);
+  --color-brick-red-500: oklch(59.34% 0.234 26.46);
+  --color-brick-red-600: oklch(50.40% 0.197 26.10);
+  --color-brick-red-700: oklch(40.89% 0.158 25.88);
+  --color-brick-red-800: oklch(30.86% 0.115 25.02);
+  --color-brick-red-900: oklch(20.05% 0.070 21.70);
+  --color-brick-red-950: oklch(16.54% 0.055 20);
+
+  /* === Deep Space Blue (Secondary) === */
+  --color-deep-space-blue-50: oklch(96.32% 0.022 230.54);
+  --color-deep-space-blue-100: oklch(92.80% 0.042 231.71);
+  --color-deep-space-blue-200: oklch(85.98% 0.083 232.88);
+  --color-deep-space-blue-300: oklch(79.73% 0.120 234.93);
+  --color-deep-space-blue-400: oklch(74.45% 0.150 237.97);
+  --color-deep-space-blue-500: oklch(69.81% 0.171 243.77);
+  --color-deep-space-blue-600: oklch(59.27% 0.144 243.18);
+  --color-deep-space-blue-700: oklch(47.99% 0.116 242.91);
+  --color-deep-space-blue-800: oklch(36.26% 0.085 241.36);
+  --color-deep-space-blue-900: oklch(23.48% 0.051 237.09);
+  --color-deep-space-blue-950: oklch(19.31% 0.041 234.78);
+
+  /* === Steel Blue (Accent) === */
+  --color-steel-blue-50: oklch(96.08% 0.008 236.56);
+  --color-steel-blue-100: oklch(92.40% 0.016 233.03);
+  --color-steel-blue-200: oklch(84.68% 0.034 234.16);
+  --color-steel-blue-300: oklch(76.72% 0.051 236.36);
+  --color-steel-blue-400: oklch(68.90% 0.070 236.89);
+  --color-steel-blue-500: oklch(61.12% 0.086 237.74);
+  --color-steel-blue-600: oklch(52.03% 0.072 238.09);
+  --color-steel-blue-700: oklch(42.54% 0.057 238.11);
+  --color-steel-blue-800: oklch(32.74% 0.041 236.23);
+  --color-steel-blue-900: oklch(21.86% 0.022 234.73);
+  --color-steel-blue-950: oklch(18.17% 0.017 241.29);
+
+  /* === Redis CLI Key Type Colors === */
+  --color-redis-string: #fbbf24;   /* Gold/Yellow */
+  --color-redis-hash: #60a5fa;     /* Blue */
+  --color-redis-list: #4ade80;     /* Green */
+  --color-redis-set: #c084fc;      /* Purple */
+  --color-redis-zset: #fb923c;     /* Orange */
+  --color-redis-stream: #22d3ee;   /* Cyan */
+
+  /* === Chart Colors === */
+  --chart-1: #3b82f6;
+  --chart-2: #22c55e;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #8b5cf6;
+  --chart-6: #06b6d4;
+  --chart-7: #f97316;
+  --chart-8: #ec4899;
+
+  /* === Success (Green - better contrast than yellow) === */
+  --color-success-50: oklch(97.5% 0.02 145);
+  --color-success-100: oklch(95% 0.04 145);
+  --color-success-200: oklch(90% 0.08 145);
+  --color-success-300: oklch(85% 0.12 145);
+  --color-success-400: oklch(80% 0.16 145);
+  --color-success-500: oklch(70% 0.18 145);
+  --color-success-600: oklch(60% 0.15 145);
+  --color-success-700: oklch(50% 0.12 145);
+  --color-success-800: oklch(40% 0.09 145);
+  --color-success-900: oklch(30% 0.06 145);
+  --color-success-950: oklch(20% 0.04 145);
+
+  /* === Molten Lava (Warning) === */
+  --color-molten-lava-50: oklch(94.30% 0.029 17.67);
+  --color-molten-lava-100: oklch(88.97% 0.058 18.30);
+  --color-molten-lava-200: oklch(78.84% 0.123 20.19);
+  --color-molten-lava-300: oklch(70.44% 0.187 23.19);
+  --color-molten-lava-400: oklch(64.89% 0.237 26.97);
+  --color-molten-lava-500: oklch(62.80% 0.258 29.23);
+  --color-molten-lava-600: oklch(53.08% 0.218 29.23);
+  --color-molten-lava-700: oklch(42.89% 0.176 29.23);
+  --color-molten-lava-800: oklch(32.04% 0.131 29.23);
+  --color-molten-lava-900: oklch(20.16% 0.083 29.23);
+  --color-molten-lava-950: oklch(16.35% 0.067 29.23);
+
+  /* === Semantic Aliases === */
+  --color-primary: var(--color-brick-red-500);
+  --color-primary-foreground: oklch(98.5% 0.002 240);
+  --color-secondary: var(--color-deep-space-blue-500);
+  --color-secondary-foreground: oklch(98.5% 0.002 240);
+  --color-accent: var(--color-steel-blue-500);
+  --color-accent-foreground: oklch(98.5% 0.002 240);
+  --color-success: var(--color-success-500);
+  --color-success-foreground: oklch(20% 0.04 145);
+  --color-warning: var(--color-molten-lava-500);
+  --color-warning-foreground: oklch(16.35% 0.067 29.23);
+  --color-danger: var(--color-brick-red-500);
+  --color-danger-foreground: oklch(98.5% 0.002 240);
+
+  /* === Standard Theme Mapping === */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-hover-foreground: var(--sidebar-hover-foreground);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* === Border Radius === */
+  --radius: 0.125rem;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: oklch(100% 0 0);
+  --foreground: oklch(14% 0.002 240);
+  --card: oklch(98.5% 0.002 240);
+  --card-foreground: oklch(14% 0.002 240);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(14% 0.002 240);
+  --primary: var(--color-brick-red-500);
+  --primary-foreground: oklch(98.5% 0.002 240);
+  --secondary: var(--color-deep-space-blue-500);
+  --secondary-foreground: oklch(98.5% 0.002 240);
+  --muted: oklch(96% 0.003 240);
+  --muted-foreground: oklch(40% 0.010 240);
+  --accent: var(--color-steel-blue-500);
+  --accent-foreground: oklch(98.5% 0.002 240);
+  --destructive: var(--color-brick-red-500);
+  --destructive-foreground: oklch(98.5% 0.002 240);
+  --border: oklch(85% 0.004 240);
+  --input: oklch(91% 0.004 240);
+  --ring: var(--color-brick-red-500);
+  --radius: 0.125rem;
+  --sidebar: oklch(98% 0.003 240);
+  --sidebar-foreground: oklch(14% 0.002 240);
+  --sidebar-primary: var(--color-brick-red-500);
+  --sidebar-primary-foreground: oklch(98.5% 0.002 240);
+  --sidebar-accent: color-mix(in oklab, var(--color-deep-space-blue-500) 12%, var(--sidebar));
+  --sidebar-accent-foreground: oklch(14% 0.01 240);
+  --sidebar-hover: color-mix(in oklab, var(--color-steel-blue-500) 14%, var(--sidebar));
+  --sidebar-hover-foreground: oklch(12% 0.01 240);
+  --sidebar-active: color-mix(in oklab, var(--color-brick-red-500) 14%, var(--sidebar));
+  --sidebar-active-foreground: oklch(12% 0.01 240);
+  --sidebar-border: color-mix(in oklab, var(--color-deep-space-blue-500) 18%, var(--border));
+  --sidebar-ring: var(--color-deep-space-blue-500);
+}
+
+.dark {
+  /* Warm dark backgrounds - softer than pure black */
+  --background: #0a0a0a;
+  --foreground: oklch(98.5% 0.002 240);
+  --card: #141414;
+  --card-foreground: oklch(98.5% 0.002 240);
+  --popover: #0a0a0a;
+  --popover-foreground: oklch(98.5% 0.002 240);
+  --primary: var(--color-brick-red-500);
+  --primary-foreground: oklch(98.5% 0.002 240);
+  --secondary: var(--color-deep-space-blue-500);
+  --secondary-foreground: oklch(98.5% 0.002 240);
+  --muted: #1f1f1f;
+  --muted-foreground: oklch(65% 0.008 240);
+  --accent: var(--color-steel-blue-500);
+  --accent-foreground: oklch(98.5% 0.002 240);
+  --destructive: var(--color-brick-red-500);
+  --destructive-foreground: oklch(98.5% 0.002 240);
+  --border: #262626;
+  --input: #262626;
+  --ring: var(--color-brick-red-500);
+  --sidebar: #0e1116;
+  --sidebar-foreground: oklch(95% 0.005 240);
+  --sidebar-primary: var(--color-brick-red-500);
+  --sidebar-primary-foreground: oklch(98.5% 0.002 240);
+  --sidebar-accent: color-mix(in oklab, var(--color-steel-blue-500) 35%, var(--sidebar));
+  --sidebar-accent-foreground: oklch(98% 0.002 240);
+  --sidebar-hover: color-mix(in oklab, var(--color-steel-blue-500) 45%, var(--sidebar));
+  --sidebar-hover-foreground: oklch(98% 0.002 240);
+  --sidebar-active: color-mix(in oklab, var(--color-brick-red-500) 28%, var(--sidebar));
+  --sidebar-active-foreground: oklch(98% 0.002 240);
+  --sidebar-border: color-mix(in oklab, var(--color-deep-space-blue-500) 35%, #0a0a0a);
+  --sidebar-ring: var(--color-steel-blue-500);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in oklab, var(--foreground) 65%, transparent);
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* === Connection Pulse Animation === */
+@keyframes redis-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-success-500) 45%, transparent);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.animate-redis-pulse {
+  animation: redis-pulse 2s ease-in-out infinite;
+}
+
+/* === Skeleton to Content Transform === */
+@keyframes skeleton-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes content-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skeleton-transform {
+  animation: skeleton-fade 0.2s ease-out forwards;
+}
+
+.content-transform {
+  animation: content-fade-in 0.3s ease-out forwards;
+}
+
+/* === Button Press Animation === */
+@keyframes button-press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn-press:active {
+  animation: button-press 0.15s ease-out;
+}
+
+/* === Table Row Hover Lift === */
+@keyframes row-lift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(2px);
+  }
+}
+
+/* === Toast Slide In === */
+@keyframes toast-slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-enter {
+  animation: toast-slide-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* === Number Count Up Animation === */
+@keyframes count-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.count-up {
+  animation: count-up 0.4s ease-out;
+}
+
+/* === Toast Card Variants === */
+.toast-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--popover) 94%, transparent);
+  color: var(--popover-foreground);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.toast-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--toast-accent, var(--color-accent));
+}
+
+.toast-card::after {
+  content: none;
+}
+
+.toast-success {
+  --toast-accent: var(--color-success-500);
+  background: color-mix(in oklab, var(--color-success-500) 18%, var(--popover));
+  border-color: color-mix(in oklab, var(--color-success-500) 45%, var(--border));
+}
+
+.toast-info {
+  --toast-accent: var(--color-steel-blue-500);
+  background: color-mix(in oklab, var(--color-steel-blue-500) 18%, var(--popover));
+  border-color: color-mix(in oklab, var(--color-steel-blue-500) 45%, var(--border));
+}
+
+.toast-warning {
+  --toast-accent: var(--color-molten-lava-500);
+  background: color-mix(in oklab, var(--color-molten-lava-500) 18%, var(--popover));
+  border-color: color-mix(in oklab, var(--color-molten-lava-500) 45%, var(--border));
+}
+
+.toast-error {
+  --toast-accent: var(--color-brick-red-500);
+  background: color-mix(in oklab, var(--color-brick-red-500) 18%, var(--popover));
+  border-color: color-mix(in oklab, var(--color-brick-red-500) 45%, var(--border));
 }
