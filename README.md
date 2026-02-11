@@ -84,6 +84,28 @@ Uses `docker-compose.yml` + your `.env`.
 | **Audit Log** | Activity feed + charts |
 | **Settings** | Preferences + about |
 
+## Screenshots
+
+### Core pages
+
+| Login | Dashboard |
+|-------|-----------|
+| ![Login screen](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
+
+| Connection page | Audit log |
+|-----------------|-----------|
+| ![Connection overview](screenshots/edit_instance_page.png) | ![Audit log page](screenshots/audit.png) |
+
+| Users | Settings (System) |
+|-------|-------------------|
+| ![Users page](screenshots/users.png) | ![System settings](screenshots/settings_system.png) |
+
+### Action modals
+
+| New connection | Edit key | Set TTL |
+|----------------|----------|---------|
+| ![New connection modal](screenshots/new_connection_modal.png) | ![Edit key modal](screenshots/edit_key_modal.png) | ![Set TTL modal](screenshots/set_ttl_modal.png) |
+
 ## UI patterns (why it feels fast)
 
 - **Dialogs (modals)** for quick actions: create connection, edit connection, delete confirmation, reset password.
